@@ -15,6 +15,8 @@ class WorkoutProvider with ChangeNotifier {
   double _speed = 0.0;
   ChadLevel _currentChadLevel = ChadLevel.levels[ChadLevelType.betaPace]!;
   Timer? _timer;
+  final List<Position> _routePoints = [];
+  Position? _currentPosition;
 
   // Getters
   bool get isRunning => _isRunning;
@@ -22,12 +24,24 @@ class WorkoutProvider with ChangeNotifier {
   double get distance => _distance;
   double get speed => _speed;
   ChadLevel get currentChadLevel => _currentChadLevel;
+  List<Position> get routePoints => _routePoints;
+  Position? get currentPosition => _currentPosition;
 
   String get formattedTime {
     int hours = _seconds ~/ 3600;
     int minutes = (_seconds % 3600) ~/ 60;
     int secs = _seconds % 60;
     return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
+  }
+
+  String get formattedPace {
+    if (_speed <= 0 || _seconds < 10) return '0:00';
+
+    double paceMinutesPerKm = 60 / _speed;
+    int minutes = paceMinutesPerKm.floor();
+    int seconds = ((paceMinutesPerKm - minutes) * 60).round();
+
+    return '${minutes}:${seconds.toString().padLeft(2, '0')}';
   }
 
   Future<bool> startWorkout() async {
@@ -64,6 +78,9 @@ class WorkoutProvider with ChangeNotifier {
 
   void _onPositionUpdate(Position position) {
     if (!_isRunning) return;
+
+    _currentPosition = position;
+    _routePoints.add(position);
 
     final previousPosition = _gpsService.previousPosition;
     if (previousPosition != null) {
@@ -111,6 +128,8 @@ class WorkoutProvider with ChangeNotifier {
     _distance = 0.0;
     _speed = 0.0;
     _currentChadLevel = ChadLevel.levels[ChadLevelType.betaPace]!;
+    _routePoints.clear();
+    _currentPosition = null;
     notifyListeners();
   }
 
