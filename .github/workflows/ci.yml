@@ -157,7 +157,7 @@ jobs:
         echo "aab_file=$AAB_FILE" >> $GITHUB_OUTPUT
 
     - name: 🏷️ Upload Release Assets
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         files: |
           ${{ steps.apk_info.outputs.apk_file }}
