@@ -17,7 +17,7 @@ class StatsScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Container(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
@@ -52,7 +52,7 @@ class StatsScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
 
             // Chad 레벨 히스토리
             Container(
@@ -84,8 +84,8 @@ class StatsScreen extends StatelessWidget {
                     final isUnlocked = index <= 1; // 예시로 2개만 해제
 
                     return Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      padding: const EdgeInsets.all(15),
+                      margin: const EdgeInsets.only(bottom: 8),
+                      padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: isUnlocked
                             ? const Color(0xFF2A2A2A)
@@ -122,7 +122,7 @@ class StatsScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
 
             // 개인 기록
             Container(
@@ -152,6 +152,7 @@ class StatsScreen extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 20), // 마지막 여백 추가
           ],
         ),
       ),

@@ -27,7 +27,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         centerTitle: true,
       ),
-      body: Container(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +71,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
 
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
 
             // 설정 섹션
             Text(
@@ -127,12 +127,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     'Activay Updates',
                     _activayUpdates,
                     (value) => setState(() => _activayUpdates = value),
-                  ),
-
-                  _buildSettingRow(
-                    'Promotional Offers',
-                    _promotionalOffers,
-                    (value) => setState(() => _promotionalOffers = value),
                   ),
 
                   _buildSettingRow(
@@ -206,6 +200,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ],
               ),
             ),
+            const SizedBox(height: 20), // 마지막 여백 추가
           ],
         ),
       ),
