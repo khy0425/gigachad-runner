@@ -45,7 +45,7 @@ dependencies:
   shared_preferences: ^2.2.2
 
   # UI/UX
-  google_fonts: ^6.1.0
+  google_fonts: ^6.3.2
 
   # 날짜 처리
   intl: ^0.20.2
